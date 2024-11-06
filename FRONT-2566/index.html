@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивная страница с карточками товаров</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<!-- Панель навигации -->
+<div class="nav">
+    <div class="burger" id="burger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">Категории</a></li>
+        <li><a href="#">Товары</a></li>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Контакты</a></li>
+        <li><a href="#">Новости</a></li>
+        <li><a href="#">FAQ</a></li>
+    </ul>
+    <div class="nav-menu" id="nav-menu">
+        <a href="#">Главная</a>
+        <a href="#">Категории</a>
+        <a href="#">Товары</a>
+        <a href="#">О нас</a>
+        <a href="#">Контакты</a>
+        <a href="#">Новости</a>
+        <a href="#">FAQ</a>
+    </div>
+</div>
+
+<script>
+    // JavaScript для управления отображением меню при нажатии на кнопку-бургер
+    document.getElementById('burger').addEventListener('click', function() {
+        document.getElementById('nav-menu').classList.toggle('active');
+    });
+</script>
+
+</body>
+</html>
