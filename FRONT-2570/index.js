@@ -12,7 +12,6 @@ const options = {
     minute: 'numeric',
 }
 const newDate = new Date()
-console.log(newDate)
 
 const dateStr = "2024-11-14T13:49:22.1695002"
 const date = new Date(dateStr)
