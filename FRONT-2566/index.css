@@ -108,6 +108,47 @@ body {
     font-size: 16px;
 }
 
+.wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.aside {
+    max-width: 200px;
+    background-color: #4e9eec;
+    padding: 2%;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.content > .card  {
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+}
+
+
+.content > .card :nth-child(3n) {
+    margin-right: 0;
+}
+
+
+.card {
+    max-width: 200px;
+    padding: 1%;
+    background-color: red;
+}
+.content > button {
+    display: none;
+}
+
 
 @media (max-width: 768px) {
     .nav ul {
@@ -120,5 +161,53 @@ body {
 
     .nav-menu.active {
         display: flex;
+    }
+    .aside{
+        display: none;
+    }
+}
+@media (max-width: 340px) {
+    .content > button {
+        display: block;
+        top: 40%;
+        position: absolute;
+        z-index: 4;
+        width: 20px;
+        height: 20px;
+    }
+    .left {
+       left: -5%;
+    }
+    .right {
+        right: -5%;
+    }
+    .wrapper {
+        justify-content: center;
+    }
+    .content {
+        position: relative;
+        justify-content: space-evenly;
+        gap: 40px;
+    }
+    .card {
+        max-width: 100px;
+        height: 90%;
+        z-index: 1;
+        /*border: 1px solid blue;*/
+        box-shadow: 2px 4px 5px black;
+    }
+    .content > .card {
+        flex: 1 1 100%;
+        margin: 0;
+    }
+    .content > .card:nth-child(n+4) {
+        display: none;
+    }
+    .content > .card:nth-child(2) {
+        position: absolute;
+        max-width: 200px;
+        height: 100%;
+        background-color: green;
+        z-index: 2;
     }
 }
