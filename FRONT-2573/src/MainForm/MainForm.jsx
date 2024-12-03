@@ -22,8 +22,6 @@ export const MainForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert('Форма успешно отправлена!');
-
         setFormData({ name: '', email: '', message: '' });
         localStorage.removeItem('formData');
     };
