@@ -1,13 +1,11 @@
-import './App.css';
-import './index.css'
-import {Request} from "./Request/Request";
-
+import "./App.css";
+import { Request } from "./Request/Request";
 
 function App() {
   return (
-      <div className="App">
-          <Request/>
-      </div>
+    <div className="App">
+      <Request />
+    </div>
   );
 }
 
