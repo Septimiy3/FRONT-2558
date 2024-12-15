@@ -1,51 +1,51 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    min-height: 100vh;
-    background-color: #f4f4f4;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+  background-color: #f4f4f4;
 }
 
 .wrapper {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .nav {
-    width: 100%;
-    background-color: navy;
-    padding: 15px 0;
-    text-align: center;
-    color: white;
-    margin-bottom: 20px;
+  width: 100%;
+  background-color: navy;
+  padding: 15px 0;
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
 }
 
 .item {
-    background-color: white;
-    padding: 20px;
-    border: 2px solid #ccc;
-    box-sizing: border-box;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background-color: white;
+  padding: 20px;
+  border: 2px solid #ccc;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .item h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
+  margin: 0 0 10px;
+  font-size: 18px;
 }
 
 .item p {
-    margin: 0;
-    font-size: 16px;
+  margin: 0;
+  font-size: 16px;
 }
