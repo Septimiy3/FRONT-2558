@@ -1,13 +1,10 @@
-import './App.css';
-import './index.css'
-import {MainForm} from "./MainForm/MainForm";
-
+import { MainForm } from "./MainForm/MainForm";
 
 function App() {
   return (
-      <div className="App">
-          <MainForm/>
-      </div>
+    <div className="App">
+      <MainForm />
+    </div>
   );
 }
 
