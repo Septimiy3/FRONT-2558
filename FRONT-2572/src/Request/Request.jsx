@@ -29,7 +29,7 @@ export const Request = () => {
       if (!response.ok) {
         throw new Error(response.status);
       }
-      const data = await response.text();
+      const data = await response.json();
       console.log(data);
       setStatus(STATUS.SUCCESS);
     } catch (error) {
