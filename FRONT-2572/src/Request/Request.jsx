@@ -26,12 +26,14 @@ export const Request = () => {
     setStatus(STATUS.PENDING);
     try {
       const response = await fetch(url);
-      if (!response) {
-        throw new Error(`Ошибка: ${response.status}`);
+      if (!response.ok) {
+        throw new Error(response.status);
       }
-      const result = await response.json();
+      const data = await response.text();
+      console.log(data);
       setStatus(STATUS.SUCCESS);
-    } catch {
+    } catch (error) {
+      console.log(error);
       setStatus(STATUS.ERROR);
     }
   };
