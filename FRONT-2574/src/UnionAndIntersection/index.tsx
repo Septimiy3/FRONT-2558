@@ -1,25 +1,17 @@
 export const UnionAndIntersection = () => {
   type PersonDataType = number | string | Date;
-  type PersonName = {
+
+  type Name = {
     name: string;
-    lastName: string;
   };
-  type PersonContact = {
+  type Phone = {
     phone: number;
+  };
+  type Mail = {
     mail: string;
   };
 
-  type PersonInfo = PersonName & PersonContact;
-
-  const isValidPersonInfo = (obj: any): obj is PersonInfo => {
-    return (
-      obj &&
-      typeof obj.name === "string" &&
-      typeof obj.lastName === "string" &&
-      typeof obj.phone === "number" &&
-      typeof obj.mail === "string"
-    );
-  };
+  type PersonInfo = Name & Phone & Mail;
 
   const name = "Олег";
   const phone = +79999999999;
@@ -27,20 +19,14 @@ export const UnionAndIntersection = () => {
 
   const personInfo = {
     name: "Олег",
-    lastName: "Башаров",
     phone: +8389678,
     mail: "mail@.ru",
   };
-  const invalidPersonalInfo = {
-    nickName: "nickName",
-  };
 
   const getPersonInfo = (info: PersonInfo) => {
-    if (!isValidPersonInfo(info)) {
-      console.log("Некорректные персональные данные.");
-      return;
-    }
-    console.log(info);
+    console.log(
+      `Меня зовут ${info.name}, мой телефон ${info.phone}, а так же моя почта ${info.mail}`,
+    );
   };
 
   const getInfo = (data: PersonDataType): void => {
@@ -61,9 +47,6 @@ export const UnionAndIntersection = () => {
       <button onClick={() => getInfo(phone)}>телефон</button>
       <button onClick={() => getInfo(date)}>Дата</button>
       <button onClick={() => getPersonInfo(personInfo)}>Валидный объект</button>
-      <button onClick={() => getPersonInfo(invalidPersonalInfo)}>
-        Невалидный объект
-      </button>
     </>
   );
 };
