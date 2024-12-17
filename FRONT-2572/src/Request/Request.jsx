@@ -27,7 +27,7 @@ export const Request = () => {
     try {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error(response.status);
+        console.log(response.status);
       }
       const data = await response.json();
       console.log(data);
