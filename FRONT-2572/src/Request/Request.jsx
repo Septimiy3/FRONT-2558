@@ -30,28 +30,23 @@ export const Request = () => {
     setStatus(STATUS.PENDING);
     fetch(url)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           setStatus(STATUS.SUCCESS);
         }
         if (response.status === 404) {
           setStatus(STATUS.ERROR_NOT_FOUND);
-          console.log("Ошибка 404");
         }
         if (response.status === 405) {
           setStatus(STATUS.ERROR_METHOD_NOT_ALLOWED);
-          console.log("Ошибка 405");
         }
         return response.json();
       })
       .then((data) => {
         if (data.code === 1) {
-          console.log(data.message);
+          setStatus(STATUS.ERROR);
         }
-        console.log(data);
       })
       .catch((error) => {
-        console.log(error);
         setStatus(STATUS.ERROR);
       });
   };
