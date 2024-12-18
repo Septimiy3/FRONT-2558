@@ -4,50 +4,42 @@ import successIcon from "./successIcon.png";
 import errorIcon from "./errorIcon.png";
 
 const STATUS = {
-  INIT: "init",
-  PENDING: "pending",
   SUCCESS: 200,
-  ERROR: "error",
   ERROR_NOT_FOUND: 404,
-  ERROR_METHOD_NOT_ALLOWED: "error",
+  ERROR_METHOD_NOT_ALLOWED: 405,
 };
 
 export const Request = () => {
-  const [status, setStatus] = useState(STATUS.INIT);
   const [url, setUrl] = useState("");
-  const statusContent = {
-    [STATUS.PENDING]: { text: "Данные загружаются", icon: logo },
-    [STATUS.SUCCESS]: { text: "Данные загружены", icon: successIcon },
-    [STATUS.ERROR]: { text: "Данные не загружены", icon: errorIcon },
-    [STATUS.ERROR_NOT_FOUND]: { text: "Ошибка 404", icon: errorIcon },
-    [STATUS.ERROR_METHOD_NOT_ALLOWED]: { text: "Ошибка 405", icon: errorIcon },
-  };
-
-  const { text, icon } = statusContent[status] || {};
+  const [textRequest, setTextRequest] = useState("Ничего не происходит");
+  const [logoRequest, setLogoRequest] = useState();
 
   //использовался сваггер для теста https://petstore.swagger.io/#/store/getInventory
   const fetchData = () => {
-    setStatus(STATUS.PENDING);
+    setLogoRequest(logo);
     fetch(url)
       .then((response) => {
-        if (response.status === 200) {
-          setStatus(STATUS.SUCCESS);
+        if (response.status === STATUS.SUCCESS) {
+          setTextRequest("Запрос выполнен");
+          setLogoRequest(successIcon);
         }
-        if (response.status === 404) {
-          setStatus(STATUS.ERROR_NOT_FOUND);
+        if (response.status === STATUS.ERROR_NOT_FOUND) {
+          setTextRequest("Ошибка 404");
+          setLogoRequest(errorIcon);
         }
-        if (response.status === 405) {
-          setStatus(STATUS.ERROR_METHOD_NOT_ALLOWED);
+        if (response.status === STATUS.ERROR_METHOD_NOT_ALLOWED) {
+          setTextRequest("Ошибка 405");
+          setLogoRequest(errorIcon);
         }
         return response.json();
       })
       .then((data) => {
         if (data.code === 1) {
-          setStatus(STATUS.ERROR);
+          setTextRequest(data.message);
         }
       })
-      .catch((error) => {
-        setStatus(STATUS.ERROR);
+      .catch(() => {
+        setTextRequest("Неизвестная ошибка");
       });
   };
 
@@ -78,12 +70,10 @@ export const Request = () => {
       <button onClick={setErrorUrl2}>Запрос с ошибкой 2</button>
       <button onClick={setErrorUrl3}>Запрос с ошибкой 3</button>
       <button onClick={setErrorUrl4}>Запрос с ошибкой 4</button>
-      {text && icon && (
-        <>
-          <div>{text}</div>
-          <img src={icon} alt={status} />
-        </>
-      )}
+      <>
+        <div>{textRequest}</div>
+        <img src={logoRequest} alt={"status"} />
+      </>
     </>
   );
 };
