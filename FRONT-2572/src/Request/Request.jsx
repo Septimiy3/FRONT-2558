@@ -6,8 +6,10 @@ import errorIcon from "./errorIcon.png";
 const STATUS = {
   INIT: "init",
   PENDING: "pending",
-  SUCCESS: "success",
+  SUCCESS: 200,
   ERROR: "error",
+  ERROR_NOT_FOUND: 404,
+  ERROR_METHOD_NOT_ALLOWED: "error",
 };
 
 export const Request = () => {
@@ -17,25 +19,41 @@ export const Request = () => {
     [STATUS.PENDING]: { text: "Данные загружаются", icon: logo },
     [STATUS.SUCCESS]: { text: "Данные загружены", icon: successIcon },
     [STATUS.ERROR]: { text: "Данные не загружены", icon: errorIcon },
+    [STATUS.ERROR_NOT_FOUND]: { text: "Ошибка 404", icon: errorIcon },
+    [STATUS.ERROR_METHOD_NOT_ALLOWED]: { text: "Ошибка 405", icon: errorIcon },
   };
 
   const { text, icon } = statusContent[status] || {};
 
   //использовался сваггер для теста https://petstore.swagger.io/#/store/getInventory
-  const fetchData = async () => {
+  const fetchData = () => {
     setStatus(STATUS.PENDING);
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        console.log(response.status);
-      }
-      const data = await response.json();
-      console.log(data);
-      setStatus(STATUS.SUCCESS);
-    } catch (error) {
-      console.log(error);
-      setStatus(STATUS.ERROR);
-    }
+    fetch(url)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          setStatus(STATUS.SUCCESS);
+        }
+        if (response.status === 404) {
+          setStatus(STATUS.ERROR_NOT_FOUND);
+          console.log("Ошибка 404");
+        }
+        if (response.status === 405) {
+          setStatus(STATUS.ERROR_METHOD_NOT_ALLOWED);
+          console.log("Ошибка 405");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.code === 1) {
+          console.log(data.message);
+        }
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setStatus(STATUS.ERROR);
+      });
   };
 
   useEffect(() => {
@@ -48,11 +66,23 @@ export const Request = () => {
   const setErrorUrl = () => {
     setUrl("https://petstore.swagger.io/v2/store/inventor");
   };
+  const setErrorUrl2 = () => {
+    setUrl("https://petstore.swagger.io/v2/store/");
+  };
+  const setErrorUrl3 = () => {
+    setUrl(`https://petstore.swagger.io/v2/store/order/${0}`);
+  };
+  const setErrorUrl4 = () => {
+    setUrl(`https://petstore.swagger.io/v2/pet/${1}`);
+  };
 
   return (
     <>
       <button onClick={setSuccessUrl}>Запрос с успешным ответом</button>
       <button onClick={setErrorUrl}>Запрос с ошибкой</button>
+      <button onClick={setErrorUrl2}>Запрос с ошибкой 2</button>
+      <button onClick={setErrorUrl3}>Запрос с ошибкой 3</button>
+      <button onClick={setErrorUrl4}>Запрос с ошибкой 4</button>
       {text && icon && (
         <>
           <div>{text}</div>
