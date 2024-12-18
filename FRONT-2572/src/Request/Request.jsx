@@ -37,9 +37,6 @@ export const Request = () => {
         if (data.code === 1) {
           setTextRequest(data.message);
         }
-      })
-      .catch(() => {
-        setTextRequest("Неизвестная ошибка");
       });
   };
 
